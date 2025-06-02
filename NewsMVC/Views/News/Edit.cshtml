@@ -1,27 +1,29 @@
 ﻿@{
 	ViewData["Title"] = "Edit";
 }
+@model New
 
 
 <div>
 	<h1 class="text-center m-5">Přidat Novinku.</h1>
 
-	<form method="post" class="w-50 mx-auto">
+	<form asp-action="Edit" method="post" class="w-50 mx-auto">
 
 		<div class="form-floating mb-3">
-			<input type="text" class="form-control" id="inp1" placeholder="Název">
+			<input type="text" asp-for="Title" class="form-control" id="inp1" placeholder="Název">
 			<label for="inp1">Název</label>
 		</div>
 		<div class="form-floating mb-3">
-			<input type="text" class="form-control" id="inp2" placeholder="Text">
+			<input type="text" asp-for="Text" class="form-control" id="inp2" placeholder="Text">
 			<label for="inp2">Text</label>
 		</div>
 		<div class="form-check">
-			<input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
+			<input type="checkbox" asp-for="IsOnTop" class="form-check-input" value="" id="flexCheckDefault">
 			<label class="form-check-label" for="flexCheckDefault">
 				Připnout?
 			</label>
 		</div>
+		<button class="btn btn-outline-info" type="submit">Odeslat</button>
 
 
 
@@ -54,3 +56,11 @@
 
 
 </div>
+
+
+@* @section Scripts {
+	@{
+		
+		await Html.RenderPartialAsync("_ValidationScriptsPartial");
+	}
+} *@

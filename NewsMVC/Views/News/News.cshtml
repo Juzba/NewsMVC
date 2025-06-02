@@ -1,13 +1,39 @@
 ﻿@{
 	ViewData["Title"] = "News";
 }
+@model IList<New>
 
 <div>
 	<h1>News</h1>
 
 	<a class="btn btn-outline-info" asp-controller="News" asp-area="" asp-action="Edit">Přidat Novinku..</a>
 
-
+	<table class="table table-dark table-hover">
+		<thead>
+			<tr>
+				<th>Id</th>
+				<th>Autor</th>
+				<th>Název</th>
+				<th>Datum</th>
+				<th>Text</th>
+				<th>Připnuto?</th>
+			</tr>
+		</thead>
+		@foreach (New item in Model)
+		{
+			<tbody>
+				<tr>
+					<td>@item.Id</td>
+					<td>@item.Autor</td>
+					<td>@item.Title</td>
+					<td>@item.DateT</td>
+					<td>@item.Text</td>
+					<td>@item.IsOnTop</td>
+					<td><a asp-action="Details" asp-route-id="@item.Id" asp-area=""  asp-controller="News" class="btn btn-info">Detail</a></td>
+				</tr>
+			</tbody>
+		}
+</table>
 
 
 </div>

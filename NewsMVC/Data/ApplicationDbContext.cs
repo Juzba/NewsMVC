@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
+using NewsMVC.Models;
 
 namespace NewsMVC.Data
 {
@@ -9,5 +10,7 @@ namespace NewsMVC.Data
             : base(options)
         {
         }
+
+       public DbSet<New> News { get; set; }
     }
 }

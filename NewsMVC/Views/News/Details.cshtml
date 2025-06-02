@@ -32,8 +32,8 @@
     </table>
 
     <a asp-action="News" asp-controller="News" class="btn btn-outline-info">Zpět na News</a>
-    <a asp-action="Edit" asp-controller="News" class="btn btn-outline-info">Editovat</a>
-    <a asp-action="Delete" asp-controller="News" class="btn btn-outline-info">Smazat</a>
+    <a asp-action="Edit" asp-route-id="@Model.Id" asp-controller="News" class="btn btn-outline-info">Editovat</a>
+    <a asp-action="Delete" asp-route-id="@Model.Id" asp-controller="News" class="btn btn-outline-info">Smazat</a>
 
 
 

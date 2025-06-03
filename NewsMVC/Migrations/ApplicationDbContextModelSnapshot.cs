@@ -232,8 +232,9 @@ namespace NewsMVC.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
-                    b.Property<string>("Autor")
-                        .HasColumnType("nvarchar(max)");
+                    b.Property<string>("AutorID")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(450)");
 
                     b.Property<DateTime>("DateT")
                         .HasColumnType("datetime2");
@@ -252,6 +253,8 @@ namespace NewsMVC.Migrations
                         .HasColumnType("nvarchar(50)");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("AutorID");
 
                     b.ToTable("News");
                 });
@@ -305,6 +308,17 @@ namespace NewsMVC.Migrations
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+                });
+
+            modelBuilder.Entity("NewsMVC.Models.New", b =>
+                {
+                    b.HasOne("Microsoft.AspNetCore.Identity.IdentityUser", "Autor")
+                        .WithMany()
+                        .HasForeignKey("AutorID")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Autor");
                 });
 #pragma warning restore 612, 618
         }

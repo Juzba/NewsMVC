@@ -16,7 +16,7 @@ namespace NewsMVC.Controllers
 
 
         [HttpPost]
-        public async Task<IActionResult> Edit(New MyNew, string id)
+        public async Task<IActionResult> Edit(New MyNew,string id = "")
         {
             if (!ModelState.IsValid) return View(MyNew);
 

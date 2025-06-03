@@ -1,21 +1,35 @@
 ﻿@{ ViewData["Title"] = "Delete";
 }
 
+@model New
+
+
 <div>
+	<h1>Smazat</h1>
 
-	<h1>Delete</h1>
+    <table class="table table-dark w-50">
+        <tr>
+            <td>Id</td>
+            <td>@Model.Id</td>
+        </tr>
+        <tr>
+            <td>Autor</td>
+            <td>@Model.Autor</td>
+        </tr>
+        <tr>
+            <td>Datum</td>
+            <td>@Model.DateT</td>
+        </tr>
+        <tr>
+            <td>Text</td>
+            <td>@Model.Text</td>
+        </tr>
+        <tr>
+            <td>Připnuto?</td>
+            <td>@Model.IsOnTop</td>
+        </tr>
+    </table>
 
-
-
-
-
-
-
-
-
-
-
-
-
+    <a asp-action="News" asp-controller="News" class="btn btn-outline-info">Zpět na News</a>
 
 </div>

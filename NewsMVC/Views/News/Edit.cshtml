@@ -5,7 +5,7 @@
 
 
 <div>
-	<h1 class="text-center m-5">Přidat Novinku.</h1>
+	<h1 class="text-center m-5">@(Model?.Id > 1 ? "Editovat novinku" : "Přidat novinku.")</h1>
 
 	<form asp-action="Edit" method="post" class="w-50 mx-auto">
 
@@ -24,43 +24,5 @@
 			</label>
 		</div>
 		<button class="btn btn-outline-info" type="submit">Odeslat</button>
-
-
-
-
-
-
-
-
-
-
 	</form>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 </div>
-
-
-@* @section Scripts {
-	@{
-		
-		await Html.RenderPartialAsync("_ValidationScriptsPartial");
-	}
-} *@

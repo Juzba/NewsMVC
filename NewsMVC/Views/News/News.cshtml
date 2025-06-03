@@ -28,7 +28,8 @@
 					<td>@item.Title</td>
 					<td>@item.DateT</td>
 					<td>@item.Text</td>
-					<td>@item.IsOnTop</td>
+					<td>@if (item.IsOnTop){
+					<span class="badge bg-light text-dark">Připnuto!</span>}</td>
 					<td><a asp-action="Details" asp-route-id="@item.Id" asp-area=""  asp-controller="News" class="btn btn-info">Detail</a></td>
 				</tr>
 			</tbody>

@@ -30,6 +30,23 @@ namespace NewsMVC.Controllers
         }
 
 
+        [HttpPost]
+        public async Task<IActionResult> DeletePost(string id)
+        {
+            if (int.TryParse(id, out int intId))
+            {
+                var oneNew = await _db.News.FindAsync(intId);
+                if(oneNew != null)
+                {
+                   _db.News.Remove(oneNew);
+                   await _db.SaveChangesAsync();
+                }
+            }
+
+            return RedirectToAction("News", "News");
+        }
+
+
         private async Task<IActionResult> ReturnDbItembyId(string id)
         {
             if (int.TryParse(id, out int intId)) return View(await _db.News.FindAsync(intId));

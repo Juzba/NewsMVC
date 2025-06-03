@@ -17,6 +17,10 @@
             <td>@Model.Autor</td>
         </tr>
         <tr>
+            <td>Název</td>
+            <td>@Model.Title</td>
+        </tr>
+        <tr>
             <td>Datum</td>
             <td>@Model.DateT</td>
         </tr>
@@ -30,6 +34,11 @@
         </tr>
     </table>
 
-    <a asp-action="News" asp-controller="News" class="btn btn-outline-info">Zpět na News</a>
+    <div class="d-flex gap-1">
+        <a asp-action="News" asp-controller="News" class="btn btn-outline-info">Zpět na News</a>
+        <form asp-action="DeletePost" asp-route-id="@Model.Id" method="post">
+            <button class="btn btn-outline-danger" type="submit">Smazat</button>
+        </form>
+    </div>
 
 </div>

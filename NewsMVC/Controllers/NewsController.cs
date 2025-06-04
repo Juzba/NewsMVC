@@ -24,22 +24,25 @@ namespace NewsMVC.Controllers
 
 
         [HttpPost]
-        public async Task<IActionResult> Edit(New MyNew, string id = "")
+        public async Task<IActionResult> Edit(New MyNew)
         {
-            if (User.Identity != null)
+
+            // New
+            if (MyNew.Autor == null && User.Identity != null)
             {
                 MyNew.Autor = await _db.Users.FirstOrDefaultAsync(x => x.UserName == User.Identity.Name);
                 ModelState.Clear();
             }
 
+
             if (!ModelState.IsValid) return View(MyNew);
 
 
 
-            // update NEW from database
-            if (!string.IsNullOrEmpty(id)) _db.Update(MyNew);
-            // add NEW to db
-            else await _db.AddAsync(MyNew);
+            // add (NEW) to db
+            if (MyNew.Id == 0) await _db.AddAsync(MyNew);
+            // update (NEW) in database
+            else  _db.Update(MyNew);
 
             await _db.SaveChangesAsync();
             return RedirectToAction("News", "News");

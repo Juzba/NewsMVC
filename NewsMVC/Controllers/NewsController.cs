@@ -6,7 +6,7 @@ using NewsMVC.Models;
 
 namespace NewsMVC.Controllers
 {
-    
+
     public class NewsController(ApplicationDbContext db) : Controller
     {
         private readonly ApplicationDbContext _db = db;
@@ -15,40 +15,31 @@ namespace NewsMVC.Controllers
 
 
 
-        public async Task<IActionResult> News()
-        {
-            string Autor5 = "vcvxvcx";
-
-
-            return View(await _db.News.ToListAsync());
-        }
-
+        public async Task<IActionResult> News() => View(await _db.News.Include(p => p.Autor).ToListAsync());
+        public async Task<IActionResult> Details(string id) => await ReturnDbItembyId(id);
         [Authorize]
         public async Task<IActionResult> Delete(string id) => await ReturnDbItembyId(id);
-        public async Task<IActionResult> Details(string id) => await ReturnDbItembyId(id);
         [Authorize]
         public async Task<IActionResult> Edit(string id) => await ReturnDbItembyId(id);
 
 
         [HttpPost]
-        public async Task<IActionResult> Edit(New MyNew,string id = "")
+        public async Task<IActionResult> Edit(New MyNew, string id = "")
         {
-            if(string.IsNullOrEmpty(id) && User.Identity != null)
+            if (User.Identity != null)
             {
                 MyNew.Autor = await _db.Users.FirstOrDefaultAsync(x => x.UserName == User.Identity.Name);
                 ModelState.Clear();
             }
-            
+
             if (!ModelState.IsValid) return View(MyNew);
 
 
 
-            // update NEW in database
+            // update NEW from database
             if (!string.IsNullOrEmpty(id)) _db.Update(MyNew);
             // add NEW to db
-            else {
-                await _db.AddAsync(MyNew);
-            }
+            else await _db.AddAsync(MyNew);
 
             await _db.SaveChangesAsync();
             return RedirectToAction("News", "News");
@@ -61,10 +52,10 @@ namespace NewsMVC.Controllers
             if (int.TryParse(id, out int intId))
             {
                 var oneNew = await _db.News.FindAsync(intId);
-                if(oneNew != null)
+                if (oneNew != null)
                 {
-                   _db.News.Remove(oneNew);
-                   await _db.SaveChangesAsync();
+                    _db.News.Remove(oneNew);
+                    await _db.SaveChangesAsync();
                 }
             }
 
@@ -74,17 +65,8 @@ namespace NewsMVC.Controllers
 
         private async Task<IActionResult> ReturnDbItembyId(string id)
         {
-            if (int.TryParse(id, out int intId)) return View(await _db.News.FindAsync(intId));
+            if (int.TryParse(id, out int intId)) return View(await _db.News.Include(p => p.Autor).FirstOrDefaultAsync(p => p.Id == intId));
             return View();
         }
-
-
-
-
-
-
-
-
-
     }
 }

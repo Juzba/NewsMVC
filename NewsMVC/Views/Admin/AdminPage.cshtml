@@ -1,0 +1,42 @@
+﻿@{
+    ViewData["Title"] = "AdminPage";
+}
+
+@model IList<UserDataForAdmin>
+
+<div>
+    <h1>AdminPage</h1>
+
+    <table class="table table-dark table-bordered">
+        <thead>
+            <tr>
+                <th>UserName</th>
+                <th>Email</th>
+                <th>Role</th>
+                <th>Přístup</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>@item.UserName</td>
+                    <td>@item.Email</td>
+                    <td></td>
+                    <td></td>
+                </tr>
+             }
+        </tbody>
+</table>
+
+
+
+
+
+
+
+
+
+
+
+</div>

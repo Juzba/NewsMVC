@@ -11,9 +11,6 @@ namespace NewsMVC.Controllers
     {
         private readonly ApplicationDbContext _db = db;
 
-        //public string Autor1 { get; set; } = default!;
-
-
 
         public async Task<IActionResult> News() => View(await _db.News.Include(p => p.Autor).ToListAsync());
         public async Task<IActionResult> Details(string id) => await ReturnDbItembyId(id);

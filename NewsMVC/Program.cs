@@ -16,7 +16,8 @@ builder.Services.AddDatabaseDeveloperPageExceptionFilter();
 
 
 
-builder.Services.AddIdentity<IdentityUser, IdentityRole>(options => { 
+builder.Services.AddIdentity<IdentityUser, IdentityRole>(options =>
+{
     options.SignIn.RequireConfirmedAccount = true;
     options.Password.RequireNonAlphanumeric = false;
     options.Password.RequiredUniqueChars = 0;
@@ -80,6 +81,7 @@ app.MapControllerRoute(
     pattern: "{controller=Home}/{action=Index}/{id?}")
     .WithStaticAssets();
 
+
 app.MapRazorPages()
    .WithStaticAssets();
 
@@ -96,6 +98,5 @@ using (var scope = scopeFactory.CreateScope())
 
 
 
-
-
 app.Run();
+
